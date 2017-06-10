@@ -45,8 +45,6 @@
 		text-align: center;
 		height: 100%;
 		width: 100%;
-		border-top: 1px solid #ddd;
-
 	}
 	.icons  a{
 		text-align: center;

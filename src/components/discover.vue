@@ -1,1 +1,35 @@
-<template><div>发现</div></template>
+<template>
+	<div>
+		<template v-for="(item,index) in contentInfo">
+			<mission-bar :content="item"></mission-bar>
+		</template>
+	</div>
+	
+
+</template>
+
+<script>
+	import missionBar from './missionBar'
+	export default {
+		components:{
+			missionBar
+		},
+		data(){
+			return{
+				content:{}
+			}
+		},
+		computed: {
+			contentInfo(){
+				return this.$store.state.event.discover.discoverInfo
+			}
+		},
+		mounted(){
+			//console.log(this.$store.state.event.discover.discoverInfo)
+		}
+	}
+</script>
+
+<style>
+	
+</style>

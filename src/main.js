@@ -16,7 +16,10 @@ import Chats from './components/chats';
 import Profile from './components/profile';
 
 let router = new VRouter({ //实例化一个vue router
-	routes: [{ //创建路由映射表
+	routes: [{
+		path: '/',
+		redirect: '/chats'
+	}, { //创建路由映射表
 		path: '/chats',
 		component: Chats
 	}, {

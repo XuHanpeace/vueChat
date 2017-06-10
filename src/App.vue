@@ -4,9 +4,8 @@
         <go-back v-if="!navMode"></go-back>
         <span>VueChat</span>
     </header>
-    <section class="container">
+    <section :class="chatPage? 'chatContainer container': 'container'">
         <router-view></router-view>
-
     </section>
     <footer>
         
@@ -36,12 +35,14 @@ export default {
     },
     computed: {
         navMode: function(){
-            console.log(this.$store.state.event.navMode)
             return this.$store.state.event.navMode
+        },
+        chatPage: function(){
+            return this.$route.path == '/chats'
         }
     },
-    methods: {
-        
+    mounted() {
+        console.log(this.$route.path)
     }
 }
 </script>
@@ -57,7 +58,7 @@ body {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       text-align: center;
-      color: #fff;
+      color: #333;
       height: 100%;
 }
 a{
@@ -70,8 +71,8 @@ header {
     top: 0;
     width: 100%;
     z-index: 3;
-    height: 3em;
-    line-height: 3em;
+    height: 3.4rem;
+    line-height: 3.4rem;
     font-size: 19px;
     background: linear-gradient(180deg,#303036,#3c3b40);
     color: #fff;
@@ -84,16 +85,22 @@ footer {
     width: 100%;
     z-index: 3;
     background-color: #f7f7f7;
+    padding-top: 2px;
+    border-top: 1px solid #ddd;
 }
 hr {
     margin: 0;
 }
 section.container{
-    padding-top: 3em;
-    padding-bottom: 3em;
-    overflow: hidden;
     position: relative;
+    padding-top: 3.4rem;
+    padding-bottom: 3.4rem;
     height: 100%;
+    overflow: hidden;
+    background-color:#f0eff5; 
+}
+section.chatContainer{
+    background-color: #fff;
 }
 #app,body,html{
     height: 100%;
