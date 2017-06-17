@@ -21,11 +21,11 @@
 		},
 		computed: {
 			contentInfo(){
-				return this.$store.state.event.discover.discoverInfo
+				return this.$store.state.basicInfo.discover.discoverInfo
 			}
 		},
 		mounted(){
-			//console.log(this.$store.state.event.discover.discoverInfo)
+			//console.log(this.$store.state.basicInfo.discover.discoverInfo)
 		}
 	}
 </script>

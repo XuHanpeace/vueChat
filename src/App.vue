@@ -1,16 +1,17 @@
 <template>
-<div id="app">
-    <header>
-        <go-back v-if="!navMode"></go-back>
-        <span>VueChat</span>
+<div id='app'>
+    <header :class="[{'isDialogue':isDialogue},'effect']">
+       <!--  <transition name="fade">
+            <go-back v-if="!navMode" class="goBack"></go-back>
+        </transition> -->
+        <my-header :title='mainTitle'></my-header>
+        <!-- <span>{{mainTitle}}</span> -->
     </header>
-    <section :class="chatPage? 'chatContainer container': 'container'">
-        <router-view></router-view>
+    <section :class="chatPage ? 'chatContainer container': 'container'">
+        <router-view keep-alive></router-view>
     </section>
-    <footer>
-        
-        <foot-nav v-if="navMode" ></foot-nav>
-        <chat-func v-if="!navMode"></chat-func>
+    <footer :class="[{'isDialogue':isDialogue},'effect']">
+        <foot-nav></foot-nav>
     </footer>
 </div>
     
@@ -18,15 +19,14 @@
 
 <script>
 import footNav from './components/footItem'
-import chatFunc from './components/chatFunc'
 import goBack from './components/goBack'
-
+import myHeader from './components/myHeader'
 
 export default {
     components: {
         footNav,
-        chatFunc,
-        goBack
+        goBack,
+        myHeader
     },
     data (){
         return{
@@ -34,20 +34,44 @@ export default {
         }
     },
     computed: {
-        navMode: function(){
-            return this.$store.state.event.navMode
+        navMode(){//从store获取nnavMode值
+            return this.$store.state.basicInfo.navMode
         },
-        chatPage: function(){
-            return this.$route.path == '/chats'
+        chatPage(){ //判断当前path
+            return this.$route.path.indexOf('chats') > 0 
+        },
+        mainTitle(){    //根当前path决定顶部title值
+            let path = this.$route.path,
+                title;
+            switch(path){
+                case '/chats':
+                    title = 'VueChat'
+                    break
+                case '/contact':
+                    title = 'Contact'
+                    break
+                case '/discover':
+                    title = 'Discover'
+                    break
+                case '/profile':
+                    title = 'Profile'
+                    break
+                default:
+                    title = 'VueChat'
+            }
+            return title
+        },
+        isDialogue(){
+            return this.$route.path.indexOf('dialogue') > 1 ? true : false
         }
     },
     mounted() {
-        console.log(this.$route.path)
     }
 }
 </script>
 
 <style>
+@import url('assets/css/fontface.css');
 *{
     box-sizing: border-box;
     padding: 0;
@@ -74,7 +98,6 @@ header {
     height: 3.4rem;
     line-height: 3.4rem;
     font-size: 19px;
-    background: linear-gradient(180deg,#303036,#3c3b40);
     color: #fff;
     text-align: center;
 }
@@ -106,6 +129,37 @@ section.chatContainer{
     height: 100%;
     overflow: hidden;
 }
+.contentBox {
+    height: 100%;
+    overflow: auto;
+}
+.bar-middle{
+    flex: 1;
+    line-height: 2.5rem;
+    text-align: left;
+    padding-left: 1rem;
+}
+.bar-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1rem;
+}
 
+.fade-enter-active {
+  transition: all .5s ease;
+}
+.fade-leave-active {
+  transition: all .5s ease;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+.goBack {
+    z-index: 999;
+}
+input:focus {
+    outline: none;
+}
 
 </style>

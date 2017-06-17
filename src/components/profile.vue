@@ -24,10 +24,10 @@
 		},
 		computed: {
 			contentInfo(){
-				return this.$store.state.event.profile.profileInfo
+				return this.$store.state.basicInfo.profile.profileInfo
 			},
 			myProfile(){
-				return this.$store.state.event.profile.myProfile
+				return this.$store.state.basicInfo.profile.myProfile
 			}
 		},
 		mounted(){

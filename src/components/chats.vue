@@ -1,25 +1,28 @@
 <template>
-	<div>
-		<search></search>
-		<ul class="chatList">
-			<template v-for="item in chatsList">
-				<li class="chatsItems" @click="changeNav(false,item.name)">
-					<div class="item">
-						<div class="img">
-							<img :src="item.portrait" alt="">
+	<div class="contentBox">
+		<div :class="[{'isDialogue':isDialogue},'effect']">
+			<search></search>
+			<ul class="chatList">
+				<template v-for="item in chatsList">
+					<li class="chatsItems" @click="showDialogue(false,item.name)">
+						<div class="item">
+							<div class="bar-left">
+								<img :src="item.portrait" alt="">
+							</div>
+							<div class="bar-middle">
+								<p class="nickName">{{item.name}}</p>
+								<p class="lastMsg">{{item.lastMsg}}</p>
+							</div>
+							<p class="chat-bar-right">{{item.lastTime}}</p>
 						</div>
-						<div class="content">
-							<p class="nickName">{{item.name}}</p>
-							<p class="lastMsg">{{item.lastMsg}}</p>
-						</div>
-						<div>
-							<span class="lastTime">{{item.lastTime}}</span>
-						</div>
-					</div>
-				</li>
-				<hr>
-			</template>
-		</ul>
+					</li>
+				</template>
+			</ul>
+		</div>
+		
+		<transition name="slide-in">
+			<router-view keep-alive :title="curName"></router-view>
+		</transition>
 	</div>
 	
 </template>
@@ -46,74 +49,114 @@
 						lastTime: "19:40"
 					},
 					{
-						portrait: require("../assets/logo.png"),
-						name: "author of vue",
+						portrait: require("../assets/chizza.jpg"),
+						name: "love magic",
 						lastMsg: "see u next time",
 						lastTime: "19:40"
 					},
 					{
-						portrait: require("../assets/logo.png"),
-						name: "author of vue",
-						lastMsg: "see u next time",
+						portrait: require("../assets/durant.jpg"),
+						name: "OKC",
+						lastMsg: "god of death is comming",
 						lastTime: "19:40"
 					},
 					{
-						portrait: require("../assets/logo.png"),
-						name: "author of vue",
-						lastMsg: "see u next time",
+						portrait: require("../assets/lobster.jpg"),
+						name: "大闸蟹爱吃",
+						lastMsg: "昨天吃了蒜蓉粉丝大闸蟹",
 						lastTime: "19:40"
 					}
-				]
+				],
+				curName : ''	//保存聊天名称，传递给router-view
+
+			}
+		},
+		computed:{
+			isDialogue(){
+				return this.$route.path.indexOf('dialogue') > 1 ? true : false
 			}
 		},
 		methods: {
-			changeNav(isNav,title){
+			changeNav(isHomePage,title){
 				console.log(title)
-				this.$store.commit('changeNavMode',{isNav,title})
+			},
+			showDialogue(isHomePage,name){
+				this.curName = name //将点击的聊天对象的名字赋值给curName
+				this.$store.commit('changeNavMode',{isHomePage,name})
+				this.$router.push('/chats/dialogue')
 			}
+
 		}
 	}
 </script>
 
 <style scope>
-	.chatsItems{
-		color: #999;
-		list-style: none;
-	}
-	.chatsItems img,.img{
-		width: 3.2em;
-		border-radius: 10px;
-	}
-	.chatsItems .img {
-		position: relative;
-	}
-	.chatsItems .item {
-		width: 100%;
-		padding-bottom: 0;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-	.chatsItems .content{
-		flex:1;
-		text-align: left;
-		margin-left: 10px;
-	}
-	.chatsItems .nickName {
-		font-weight: bold;
-		font-size: 1.3em;
-		color: #333;
-	}
-	.chatsItems .lastMsg{
-		padding-top: 3px;
-	}
-	ul.chatList {
-		height: 100%;
-		overflow: auto;
-		background-color: #fff;
-	}
-	ul,li{
-		padding: 6px;
-	}
+.chatsItems {
+	color: #999;
+	list-style: none;
+	border-bottom: 1px solid #bbb;
+}
+.chatsItems img,.img {
+	width: 3.2em;
+	border-radius: 10px;
+}
+.chatsItems .img {
+	position: relative;
+}
+.chatsItems .item {
+	width: 100%;
+	padding:.3em 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.chatsItems .content {
+	flex:1;
+	text-align: left;
+	margin-left: 10px;
+}
+.chatsItems .nickName {
+	font-size: 1.3em;
+	color: #333;
+}
+.chatsItems .bar-middle {
+	line-height: 1.5rem;
+}
+.chatsItems .bar-left {
+	padding-left: 0;
+}
+.lastTime {
+	padding-right: 3px
+}
+.lastMsg {
+	line-height: 2rem;
+}
+ul.chatList {
+	background-color: #fff;
+	padding-left: .4rem;
+}
+.isDialogue{
+	transform: translate3d(-30%, 0, 0);
+}
+.effect{
+	opacity: 1;
+	transition: .3s all ease;
+}
+.chat-bar-right {
+	padding-right: .4em;
+}
+.slide-in-enter-active {
+  transition: all .33s ease;
+}
+.slide-in-leave-active {
+  transition: all .33s ease;
+}
+.slide-in-enter, .slide-in-leave-active {
+  transform: translateX(99.9%);
+}
+
+
+
+	
 	
 </style>

@@ -9,7 +9,7 @@ import store from './store/index'
 
 /*router components*/
 import chats from "./components/chats";
-import chatFunc from "./components/chatFunc";
+import dialogue from "./components/dialogue";
 import Contact from './components/contact';
 import Discover from './components/discover';
 import Chats from './components/chats';
@@ -21,7 +21,11 @@ let router = new VRouter({ //实例化一个vue router
 		redirect: '/chats'
 	}, { //创建路由映射表
 		path: '/chats',
-		component: Chats
+		component: Chats,
+		children: [{
+			path: '/chats/dialogue',
+			component: dialogue
+		}]
 	}, {
 		path: '/contact',
 		component: Contact
@@ -47,7 +51,7 @@ new Vue({
 	components: {
 		Layout,
 		chats,
-		chatFunc,
+		dialogue,
 		Chats,
 		Contact,
 		Profile,

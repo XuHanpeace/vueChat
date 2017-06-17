@@ -4,11 +4,13 @@ import getters from './getters.js'
 import mutations from './mutations.js'
 import discover from '../discoverInfo.js'
 import profile from '../profileInfo.js'
+import contactList from '../contactList.js'
 
 const state = {
-	navMode: true,
+	isHomePage: true,
 	discover,
-	profile
+	profile,
+	contactList
 }
 
 export default {

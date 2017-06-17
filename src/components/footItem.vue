@@ -1,7 +1,7 @@
 <template>
 	<div class="icons">
 		<template v-for="(item,index) in options">
-			<div  @click="select(index)">
+			<div>
 				<router-link :to="{path:item.goto}" :class="{isSelected: index === selected}" >
 					<icon :name="item.name" scale="3"></icon>
 					<p>{{item.content}}</p>
@@ -25,13 +25,34 @@
 					{name:'contacts',content:'Contacts',goto:'contact'},
 					{name:'discover',content:'Discover',goto:'discover'},
 					{name:'me',content:'Me',goto:'profile'}
-				],
-				selected :0
+				]
+			}
+		},
+		computed:{
+			selected(){		//根据path判断选定哪个底部菜单
+				let path = this.$route.path,
+					selectedIdx;
+				switch(path){
+					case '/chats':
+						selectedIdx = 0
+						break
+					case '/contact':
+						selectedIdx = 1
+						break
+					case '/discover':
+						selectedIdx = 2
+						break
+					case '/profile':
+						selectedIdx = 3
+						break
+					default:
+						selectedIdx = 0
+				}
+				return selectedIdx
 			}
 		},
 		methods: {
 			select(index){
-				console.log(index)
 				this.selected = index;
 			}
 		}
