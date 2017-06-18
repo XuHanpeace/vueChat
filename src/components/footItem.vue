@@ -59,31 +59,31 @@
 	}
 </script>
 <style>
-	.icons {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		text-align: center;
-		height: 100%;
-		width: 100%;
-	}
-	.icons  a{
-		text-align: center;
-		margin-top: 10px;
-		color: #999;
-		width: 10em;
-	}
-	.icons .isSelected {
-		color: #1aac19;
-	}
-	.icons  p {
-		text-align: center;
-		margin:0;
-	}
-	.router-link-active {
-	    text-decoration: none;
-	    outline: none;
-	}
+.icons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+}
+.icons  a{
+	text-align: center;
+	margin-top: 10px;
+	color: #999;
+	width: 10em;
+}
+.icons .isSelected {
+	color: #1aac19;
+}
+.icons  p {
+	text-align: center;
+	margin:0;
+}
+.router-link-active {
+    text-decoration: none;
+    outline: none;
+}
 
 	
 </style>

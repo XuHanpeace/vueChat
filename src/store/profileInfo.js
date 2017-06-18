@@ -41,8 +41,9 @@ export default {
 
 	},
 	myProfile: {
-		avator: avator,
+		icon: avator,
 		nickName: '大热狗狗',
-		identity: 'longlivehotdog'
+		identity: 'longlivehotdog',
+		gender: null
 	}
 }

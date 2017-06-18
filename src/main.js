@@ -8,12 +8,13 @@ import VRouter from 'vue-router'
 import store from './store/index'
 
 /*router components*/
-import chats from "./components/chats";
-import dialogue from "./components/dialogue";
-import Contact from './components/contact';
-import Discover from './components/discover';
-import Chats from './components/chats';
-import Profile from './components/profile';
+import chats from "./components/chats"
+import dialogue from "./components/dialogue"
+import Contact from './components/contact'
+import Discover from './components/discover'
+import Chats from './components/chats'
+import Profile from './components/profile'
+import personality from './components/personality'
 
 let router = new VRouter({ //实例化一个vue router
 	routes: [{
@@ -28,7 +29,11 @@ let router = new VRouter({ //实例化一个vue router
 		}]
 	}, {
 		path: '/contact',
-		component: Contact
+		component: Contact,
+		children: [{
+			path: '/contact/personality',
+			component: personality
+		}]
 	}, {
 		path: '/discover',
 		component: Discover

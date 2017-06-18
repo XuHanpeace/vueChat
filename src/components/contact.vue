@@ -1,10 +1,15 @@
 <template>
 	<div class="contentBox">
-		<search></search>
-		<template v-for="item in contactDetails">
-			<div class="initials" v-if="!(item[0].initials =='default')">{{item[0].initials}}</div>
-			<contact-bar :details="item"></contact-bar>
-		</template>
+		<search :class="[{'isDialogue':isDialogue},'effect']"></search>
+		<div :class="[{'isDialogue':isDialogue},'effect']">
+			<template v-for="item in contactDetails">
+				<div class="initials" v-if="!(item[0].initials =='default')">{{item[0].initials}}</div>
+				<contact-bar :details="item"></contact-bar>
+			</template>
+		</div>
+		<transition name="slide-in">
+			<router-view></router-view>
+		</transition>
 	</div>
 </template>
 
@@ -22,14 +27,18 @@
 
 			}
 		},
+		method: {
+			
+		},
 		computed: {
 			contactDetails(){
 				return this.$store.state.basicInfo.contactList.list
+			},
+			isDialogue() {
+				return this.$route.path.indexOf('personality') > 0 ? true : false;
 			}
 		},
-		mounted(){
-			console.log(this.$store.state.basicInfo.contactList.list)
-		}
+		mounted(){}
 	}
 </script>
 

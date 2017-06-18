@@ -8,7 +8,7 @@
 		</div>
 		<div class="chatPlus">
 			<span class="sticker iconfont icon-dialogue-smile"></span>
-			<span class="more iconfont icon-dialogue-more"></span>
+			<span class="iconfont icon-dialogue-more"></span>
 		</div>
 	</div>
 </template>

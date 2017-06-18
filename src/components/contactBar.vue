@@ -2,7 +2,7 @@
 
 	<div>
 		<template v-for="(item,index) in details">
-			<div class="contactBar">
+			<div class="contactBar" @click="showPersonality(false,item.initials,index)">
 				<div class="bar-left">
 					<img class="contact-img" :src="item.icon" alt="">
 				</div>
@@ -19,6 +19,15 @@
 		data(){
 			return {
 
+			}
+		},
+		methods: {
+			showPersonality(isHome,initials,index) {
+				//触发mutation showPersonality方法
+				this.$store.commit('showPersonality',{isHome,initials,index})
+				//改变store中origin的值为Contacts
+				this.$store.state.basicInfo.origin = 'Contacts'
+				this.$router.push('/contact/personality')
 			}
 		},
 		mounted(){

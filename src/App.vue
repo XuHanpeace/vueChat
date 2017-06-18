@@ -1,11 +1,7 @@
 <template>
 <div id='app'>
     <header :class="[{'isDialogue':isDialogue},'effect']">
-       <!--  <transition name="fade">
-            <go-back v-if="!navMode" class="goBack"></go-back>
-        </transition> -->
         <my-header :title='mainTitle'></my-header>
-        <!-- <span>{{mainTitle}}</span> -->
     </header>
     <section :class="chatPage ? 'chatContainer container': 'container'">
         <router-view keep-alive></router-view>
@@ -42,7 +38,16 @@ export default {
         },
         mainTitle(){    //根当前path决定顶部title值
             let path = this.$route.path,
-                title;
+                title = '',
+                reg = /\/(\S*)\//
+
+            //用正则截取一级路由做main title的判断
+            //防止在切换二级路由时，main tile走到default条件下
+            if(path.match(reg) !== null){
+                path = path.match(reg)[0]
+                path = path.substring(0,path.length - 1)
+            }
+
             switch(path){
                 case '/chats':
                     title = 'VueChat'
@@ -62,10 +67,8 @@ export default {
             return title
         },
         isDialogue(){
-            return this.$route.path.indexOf('dialogue') > 1 ? true : false
+            return this.$route.path.lastIndexOf('/') > 0 ? true : false
         }
-    },
-    mounted() {
     }
 }
 </script>
@@ -147,13 +150,16 @@ section.chatContainer{
 }
 
 .fade-enter-active {
-  transition: all .5s ease;
+  transition: all .3s ease;
 }
 .fade-leave-active {
-  transition: all .5s ease;
+  transition: all .3s ease;
 }
 .fade-enter, .fade-leave-active {
   opacity: 0;
+}
+.isDialogue span {
+    opacity: 0;
 }
 .goBack {
     z-index: 999;
@@ -161,5 +167,7 @@ section.chatContainer{
 input:focus {
     outline: none;
 }
+
+
 
 </style>

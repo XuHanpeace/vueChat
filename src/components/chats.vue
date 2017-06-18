@@ -77,12 +77,13 @@
 			}
 		},
 		methods: {
-			changeNav(isHomePage,title){
-				console.log(title)
-			},
 			showDialogue(isHomePage,name){
-				this.curName = name //将点击的聊天对象的名字赋值给curName
-				this.$store.commit('changeNavMode',{isHomePage,name})
+				//将点击的聊天对象的名字赋值给curName
+				this.curName = name 
+				//改变state中origin值为VueChat 
+				this.$store.state.basicInfo.origin = 'VueChat'
+				//触发vuex mutation中的showDialogue方法
+				this.$store.commit('showDialogue',{isHomePage,name})
 				this.$router.push('/chats/dialogue')
 			}
 
@@ -98,7 +99,7 @@
 }
 .chatsItems img,.img {
 	width: 3.2em;
-	border-radius: 10px;
+	border-radius: 4px;
 }
 .chatsItems .img {
 	position: relative;

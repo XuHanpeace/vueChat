@@ -1,6 +1,6 @@
 <template>
 	<div class="dialogue">
-		<my-header class="dialogue-header" :title="title"></my-header>
+		<my-header :title="title"></my-header>
 		<div class="dialogue-body"></div>
 		<chat-panel class="dialogue-footer"></chat-panel>
 	</div>
@@ -24,19 +24,8 @@ export default {
 }
 </script>
 
-<style scope>
-.dialogue-header {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	z-index: 3;
-	height: 3.4rem;
-	line-height: 3.4rem;
-	font-size: 19px;
-	color: #fff;
-	text-align: center;
-}
+<style>
+
 .dialogue-body {
 	width: 100%;
 	height: 100%;

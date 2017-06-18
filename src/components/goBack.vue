@@ -1,15 +1,15 @@
 <template>
-	<transition name="fade">
-
+	<!-- <transition name="fade"> -->
 		<div class="goback" @click="goback" v-if="!isHomePage">
 			<span class="backSymbol"></span>
-			<span>WeChat</span>	
+			<span>{{getBack}}</span>	
 		</div>
-	</transition>
+	<!-- </transition> -->
 </template>
 
 <script>
 export default {
+	props: ['getBack'],
 	data(){
 		return {
 			isHomePage : true
@@ -28,7 +28,6 @@ export default {
 		//不把isHomePage写在计算属性是因为主页也用到了myHeader
 		//他们共享计算属性，所以只能赋值给私有作用域的data model里面
 		this.isHomePage = this.$store.state.basicInfo.isHomePage
-		console.log(this.isHomePage)
 	}
 }
 </script>
