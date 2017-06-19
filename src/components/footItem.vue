@@ -3,7 +3,7 @@
 		<template v-for="(item,index) in options">
 			<div>
 				<router-link :to="{path:item.goto}" :class="{isSelected: index === selected}" >
-					<icon :name="item.name" scale="3"></icon>
+					<icon :name="item.name" scale="2.5"></icon>
 					<p>{{item.content}}</p>
 				</router-link>
 			</div>

@@ -92,6 +92,7 @@
 
 .nickName img {
 	width: 18px;
-	vertical-align: text-bottom;
+	position: relative;
+	top: .2em;
 }
 </style>

@@ -87,6 +87,7 @@ body {
       text-align: center;
       color: #333;
       height: 100%;
+      font-size: 15px;
 }
 a{
     text-decoration: none;
@@ -140,7 +141,7 @@ section.chatContainer{
     flex: 1;
     line-height: 2.5rem;
     text-align: left;
-    padding-left: 1rem;
+    padding-left: .7rem;
 }
 .bar-left {
     display: flex;

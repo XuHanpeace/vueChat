@@ -95,7 +95,7 @@
 .chatsItems {
 	color: #999;
 	list-style: none;
-	border-bottom: 1px solid #bbb;
+	border-bottom: 1px solid #dadada;
 }
 .chatsItems img,.img {
 	width: 3.2em;
@@ -106,7 +106,7 @@
 }
 .chatsItems .item {
 	width: 100%;
-	padding:.3em 0;
+	padding: .4em 0;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -117,7 +117,7 @@
 	margin-left: 10px;
 }
 .chatsItems .nickName {
-	font-size: 1.3em;
+	font-size: 1.2em;
 	color: #333;
 }
 .chatsItems .bar-middle {
@@ -129,9 +129,7 @@
 .lastTime {
 	padding-right: 3px
 }
-.lastMsg {
-	line-height: 2rem;
-}
+
 ul.chatList {
 	background-color: #fff;
 	padding-left: .4rem;
