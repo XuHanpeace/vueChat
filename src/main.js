@@ -32,6 +32,7 @@ let router = new VRouter({ //实例化一个vue router
 		component: Contact,
 		children: [{
 			path: '/contact/personality',
+			name: 'personality',
 			component: personality
 		}]
 	}, {
@@ -48,7 +49,7 @@ Vue.use(VRouter);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-new Vue({
+let oVue = new Vue({
 	el: '#app',
 	router,
 	store,

@@ -18,6 +18,8 @@ import footNav from './components/footItem'
 import goBack from './components/goBack'
 import myHeader from './components/myHeader'
 
+import io from 'socket.io-client'
+
 export default {
     components: {
         footNav,
@@ -69,6 +71,16 @@ export default {
         isDialogue(){
             return this.$route.path.lastIndexOf('/') > 0 ? true : false
         }
+    },
+    created() {
+        const socket = io.connect('http://192.168.23.3:8081/#/chats')
+
+        //这里用来统计接收后台推送来的消息数目
+        // socket.on('newMsg', data => {
+        //     console.log(data)
+
+        //     socket.emit('shit',{hi: 'this is shit'})
+        // })
     }
 }
 </script>

@@ -4,7 +4,11 @@
 			<span class="iconfont icon-dialogue-voice"></span>
 		</div>
 		<div class="chatWay">
-			<input type="text" class="inputWay" @focus="wakeupKeyBoard">
+			<input type="text" 
+				class="inputWay" 
+				v-model="messages" 
+				@focus="wakeupKeyBoard" 
+				@keyup.enter="sendMsg">
 		</div>
 		<div class="chatPlus">
 			<span class="sticker iconfont icon-dialogue-smile"></span>
@@ -14,17 +18,31 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
+
 export default {
+	props: ['socket'],
 	data() {
 		return{
-
+			messages: ''
 		}
 	},
 	methods: {
-		wakeupKeyBoard(){
+		wakeupKeyBoard() {
 			//软键盘唤醒后页面滚动到顶部
 			scrollTo(0,document.body.scrollHeight)
+		},
+		sendMsg() {
+
+			//将输入信息推送给后台，后台再广播给其他用户
+			this.socket.emit('sendMsg',{userName:'大热狗狗',content:this.messages,userType: 'others'})
+			//将输入信息传递给父组件，父组件接收到新信息后显示到聊天面板
+			this.$emit('showMsg',{content:this.messages,userType: 'self',userName: '大热狗狗'})
+			this.messages = ''
 		}
+	},
+	mounted() {
+		
 	}
 }
 </script>

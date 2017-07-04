@@ -9,6 +9,5 @@ export default {
 			//将选中的用户信息保存到current profile中
 			states.currentProfile = states.contactList.list[param.initials][param.index]
 
-			console.log(states.currentProfile.icon)
 		}
 }
