@@ -91,18 +91,22 @@ var io = require('socket.io')(server)
 var flag = 1
 
 io.sockets.on('connection', socket => {
-    socket.on('login', () => {
-        flag++
 
-        console.log(flag)
-    })
 
     socket.on('sendMsg', data => {
-        console.log(data)
 
         //将收到的消息广播给其他用户
         socket.broadcast.emit('newMsg', data)
 
+        //向所有用户推送实时消息
+        var timeObj = new Date(),
+            time = timeObj.getHours() + ':' + timeObj.getMinutes(),
+            postObj = {
+                content: data.userName + ': ' + data.content,
+                time: time
+            }
+
+        io.sockets.emit('postMsg', postObj)
     })
 })
 

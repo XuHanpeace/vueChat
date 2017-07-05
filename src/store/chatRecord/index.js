@@ -7,7 +7,7 @@ import mutations from './mutations.js'
 
 import * as func from '../localstorage'
 
-const state = func.keepRecord.get() || null
+const state = []
 
 export default {
 	state,

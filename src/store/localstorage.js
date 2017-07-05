@@ -1,7 +1,5 @@
 const localstore = function(item, defaultVal) {
 	this.get = function() {
-		console.log('item: ' + item)
-		console.log('defaultVal:' + defaultVal)
 		return localStorage.getItem(item) !== null ? localStorage.getItem(item) : defaultVal
 	}
 

@@ -160,6 +160,7 @@ section.chatContainer{
     flex-direction: column;
     justify-content: center;
     padding-left: 1rem;
+    position: relative;
 }
 
 .fade-enter-active {

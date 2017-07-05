@@ -7,6 +7,7 @@
 					<li class="chatsItems" @click="showDialogue(false,item.name)">
 						<div class="item">
 							<div class="bar-left">
+								<i class="msgTip" v-if="item.type === 'groupChat' && msgNum !== 0">{{msgNum}}</i>
 								<img :src="item.portrait" alt="">
 							</div>
 							<div class="bar-middle">
@@ -29,46 +30,54 @@
 
 <script>
 	import search from './search'
+	import io from 'socket.io-client'
+
 	export default {
 		components:{
 			search
 		},
 		data () {
 			return{
-				chatsList:[
+				chatsList: [
 					{
 						portrait: require("../assets/group.jpg"),
-						name: "group chat",
+						type: "groupChat",
+						name: "群聊测试",
 						lastMsg: "be my guest",
 						lastTime: "yesterday"
 					},
 					{
 						portrait: require("../assets/logo.png"),
+						type: "normal",
 						name: "author of vue",
 						lastMsg: "see u next time",
 						lastTime: "19:40"
 					},
 					{
 						portrait: require("../assets/chizza.jpg"),
+						type: "normal",
 						name: "love magic",
 						lastMsg: "see u next time",
 						lastTime: "19:40"
 					},
 					{
 						portrait: require("../assets/durant.jpg"),
+						type: "normal",
 						name: "OKC",
 						lastMsg: "god of death is comming",
 						lastTime: "19:40"
 					},
 					{
 						portrait: require("../assets/lobster.jpg"),
+						type: "normal",
 						name: "大闸蟹爱吃",
 						lastMsg: "昨天吃了蒜蓉粉丝大闸蟹",
 						lastTime: "19:40"
 					}
 				],
-				curName : ''	//保存聊天名称，传递给router-view
-
+				curName: '',	//保存聊天名称，传递给router-view
+				msgNum: 0	//记录新消息数量
+				
 			}
 		},
 		computed:{
@@ -78,6 +87,7 @@
 		},
 		methods: {
 			showDialogue(isHomePage,name){
+				this.msgNum = 0
 				//将点击的聊天对象的名字赋值给curName
 				this.curName = name 
 				//改变state中origin值为VueChat 
@@ -87,6 +97,41 @@
 				this.$router.push('/chats/dialogue')
 			}
 
+		},
+		created() {
+			const socket = io.connect('http://192.168.23.3:8081/#/chats')
+
+			let msgArr = []
+
+			
+
+			//接收后台推送的最新信息
+			socket.on('postMsg', data => {
+				//只有停留在主页的时候，才提示红圈新消息
+				if(this.$route.path.indexOf('dialogue') < 0){
+					if(this.msgNum > 99){
+						this.msgNum = '...'
+					}else {
+						this.msgNum++ 
+					}
+				}
+				
+				//这里推送的消息仅仅体现在群聊中，待优化
+				this.chatsList[0].lastMsg = data.content
+				this.chatsList[0].lastTime = data.time
+
+			})
+
+			//接收后台推送的所有消息
+			socket.on('newMsg', data => {
+
+				msgArr.push(data)
+
+				//TODO： 建立一个全局socket
+				//将接受的数据保存到vuex,不知道为什么用dispatch会失效
+				//this.$store.dispatch('keepRecord',msgArr)
+				this.$store.state.chatRecord = msgArr
+			})
 		}
 	}
 </script>
@@ -152,6 +197,25 @@ ul.chatList {
 }
 .slide-in-enter, .slide-in-leave-active {
   transform: translateX(99.9%);
+}
+
+.msgTip {
+	position: absolute;
+	font-style: initial;
+	font-family: PingFang SC, Hiragino Sans GB, Arial, Microsoft YaHei, Helvetica;
+	right: -9px;
+	top: -5px;
+	z-index: 2;
+	padding: 0 4px;
+	width: auto;
+	min-width: 18px;
+	height: 18px;
+	line-height: 18px;
+	border-radius: 9px;
+	color: #ffffff;
+	text-align: center;
+	font-size: 14px;
+	background-color: #f43531;
 }
 
 

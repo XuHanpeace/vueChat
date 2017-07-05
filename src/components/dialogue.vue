@@ -31,11 +31,7 @@ export default {
 	data() {
 		return {
 			socket: null,
-			msgList: [{
-					userType: 'others',
-					userName:'大味贝壳汗脚',
-					content: '你是一个大傻逼'
-				}]
+			msgList: []	//存放聊天信息
 			
 		}
 	},
@@ -43,14 +39,12 @@ export default {
 		showMsg(contenObj) {
 			if(contenObj.content.length > 0) {
 				this.msgList.push(contenObj)
-				
-				//调用vuex定义的keepRecord，保存聊天记录到localstorage
-				this.$store.dispatch('keepRecord',this.msgList)
-
-				console.log('start')
 			}
 
 		}
+	},
+	computed: {
+		
 	},
 	created() {
 		const socket = io.connect('http://192.168.23.3:8081/#/chats/dialogue')
@@ -59,16 +53,26 @@ export default {
 		this.socket = socket
 		
 		socket.on('newMsg', data => {
-			console.log(data)
 			this.msgList.push(data)
 		})
 
-		socket.emit('login')
+		
 	},
 	updated() {
 		let diaBody = document.getElementById('diaBody')
 		//聊天内容渲染到视图后再进行滚动
 		diaBody.scrollTop = diaBody.scrollHeight
+	},
+	mounted() {	
+		
+		this.msgList = this.$store.state.chatRecord
+	},
+	beforeDestroy() {
+		//退出聊天后，先断开socket连接，再保存聊天记录到vuex
+		this.socket.disconnect()
+		//this.$store.state.chatRecord = this.msgList
+		this.$store.dispatch('keepRecord',this.msgList)
+		//this.$store.dispatch('clearRecord')
 	}
 }
 </script>
