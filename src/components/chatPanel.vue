@@ -35,9 +35,10 @@ export default {
 		sendMsg() {
 
 			//将输入信息推送给后台，后台再广播给其他用户
-			this.socket.emit('sendMsg',{userName:'大热狗狗',content:this.messages,userType: 'others'})
+			//TODO: 将用户名变为可配置，每个客户端有唯一一个用户名
+			this.socket.emit('sendMsg',{userName:'路人甲',content:this.messages,userType: 'others'})
 			//将输入信息传递给父组件，父组件接收到新信息后显示到聊天面板
-			this.$emit('showMsg',{content:this.messages,userType: 'self',userName: '大热狗狗'})
+			this.$emit('showMsg',{content:this.messages,userType: 'self',userName: '路人甲'})
 			this.messages = ''
 		}
 	},

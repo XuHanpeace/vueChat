@@ -99,7 +99,7 @@
 
 		},
 		created() {
-			const socket = io.connect('http://192.168.23.3:8081/#/chats')
+			const socket = io.connect('http://localhost:8081/#/chats')
 
 			let msgArr = []
 
@@ -128,7 +128,6 @@
 				msgArr.push(data)
 
 				//TODO： 建立一个全局socket
-				//将接受的数据保存到vuex,不知道为什么用dispatch会失效
 				//this.$store.dispatch('keepRecord',msgArr)
 				this.$store.state.chatRecord = msgArr
 			})

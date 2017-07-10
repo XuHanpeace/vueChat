@@ -73,7 +73,7 @@ export default {
         }
     },
     created() {
-        const socket = io.connect('http://192.168.23.3:8081/#/chats')
+        //const socket = io.connect('http://localhost:8081/#/chats')
 
         //这里用来统计接收后台推送来的消息数目
         // socket.on('newMsg', data => {

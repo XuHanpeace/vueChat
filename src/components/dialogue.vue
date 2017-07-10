@@ -47,7 +47,7 @@ export default {
 		
 	},
 	created() {
-		const socket = io.connect('http://192.168.23.3:8081/#/chats/dialogue')
+		const socket = io.connect('http://localhost:8081/#/chats/dialogue')
 
 		//建立socket连接，接收msgList信息
 		this.socket = socket
@@ -64,7 +64,7 @@ export default {
 		diaBody.scrollTop = diaBody.scrollHeight
 	},
 	mounted() {	
-		
+
 		this.msgList = this.$store.state.chatRecord
 	},
 	beforeDestroy() {
