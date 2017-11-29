@@ -1,1 +1,26 @@
-ecosystem.json
+{
+	"apps": [{
+		"name": "vueChat",
+		"script": "app.js",
+		"env": {
+			"COMMON_VARIBLE": "true"
+		},
+		"env_production": {
+			"NODE_ENV": "production"
+		}
+	}],
+
+	"deploy": {
+		"production": {
+			"user": "root",
+			"host": ["192.168.37.129"],
+			"ref": "origin/master",
+			"repo": "https://github.com/XuHanpeace/vueChat.git",
+			"path": "/www/vueChat/production",
+			"ssh_options": "StrictHostKeyChecking=no",
+			"env": {
+				"NODE_ENV": "production"
+			}
+		}
+	}
+}
