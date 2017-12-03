@@ -88,7 +88,6 @@ var server = app.listen(port)
 //add websocket
 //reference from https://socket.io/docs/server-api/
 var io = require('socket.io')(server)
-var flag = 1
 
 io.sockets.on('connection', socket => {
 

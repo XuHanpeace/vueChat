@@ -63,4 +63,5 @@ let oVue = new Vue({
 		Profile,
 		Discover
 	}
-})
+});
+
