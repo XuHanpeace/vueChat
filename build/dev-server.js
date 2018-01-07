@@ -14,10 +14,10 @@ var webpackConfig = process.env.NODE_ENV === 'testing' ? require('./webpack.prod
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
-    // automatically open browser, if not set will be false
+// automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
-    // Define HTTP proxies to your custom API backend
-    // https://github.com/chimurai/http-proxy-middleware
+// Define HTTP proxies to your custom API backend
+// https://github.com/chimurai/http-proxy-middleware
 var proxyTable = config.dev.proxyTable
 
 var app = express()
@@ -29,9 +29,9 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
-        log: () => {}
-    })
-    // force page reload when html-webpack-plugin template changes
+    log: () => {}
+})
+// force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function(compilation) {
     compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) {
         hotMiddleware.publish({
@@ -76,7 +76,7 @@ var readyPromise = new Promise(resolve => {
 console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
     console.log('> Listening at ' + uri + '\n')
-        // when env is testing, don't need open it
+    // when env is testing, don't need open it
     if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
         opn(uri)
     }
@@ -95,6 +95,7 @@ io.sockets.on('connection', socket => {
     socket.on('sendMsg', data => {
 
         //将收到的消息广播给其他用户
+        console.log(data)
         socket.broadcast.emit('newMsg', data)
 
         //向所有用户推送实时消息

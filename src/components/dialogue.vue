@@ -7,8 +7,6 @@
 					<chat-box :chatContent='msgList[index]'></chat-box>
 				</template>
 			</div>
-			
-			
 		</div>
 		<chat-panel class='dialogue-footer' v-on:showMsg='showMsg' :socket='socket'></chat-panel>
 	</div>
@@ -55,8 +53,6 @@ export default {
 		socket.on('newMsg', data => {
 			this.msgList.push(data)
 		})
-
-		
 	},
 	updated() {
 		let diaBody = document.getElementById('diaBody')
