@@ -6,6 +6,7 @@
 		<div class="chatWay">
 			<input type="text" 
 				class="inputWay" 
+				id="myInput"
 				v-model="messages" 
 				@focus="wakeupKeyBoard" 
 				@keyup.enter="sendMsg">
@@ -30,9 +31,15 @@ export default {
 	methods: {
 		wakeupKeyBoard() {
 			//软键盘唤醒后页面滚动到顶部
-			scrollTo(0,document.body.scrollHeight)
+			setTimeout(function(){
+			//scrollTo(0,800)
+				
+			},2000)
+			//alert(document.body.scrollHeight)
 		},
 		sendMsg() {
+
+			document.getElementById('myInput').blur();
 
 			//将输入信息推送给后台，后台再广播给其他用户
 			//TODO: 将用户名变为可配置，每个客户端有唯一一个用户名

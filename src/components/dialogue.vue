@@ -45,7 +45,7 @@ export default {
 		
 	},
 	created() {
-		const socket = io.connect('http://localhost:8081/#/chats/dialogue')
+		const socket = io.connect('http://39.106.213.209:1234/#/chats/dialogue')
 
 		//建立socket连接，接收msgList信息
 		this.socket = socket
@@ -56,6 +56,7 @@ export default {
 	},
 	updated() {
 		let diaBody = document.getElementById('diaBody')
+
 		//聊天内容渲染到视图后再进行滚动
 		diaBody.scrollTop = diaBody.scrollHeight
 	},

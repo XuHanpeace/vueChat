@@ -99,7 +99,7 @@
 
 		},
 		created() {
-			const socket = io.connect('http://localhost:8081/#/chats')
+			const socket = io.connect('http://39.106.213.209:1234/#/chats')
 
 			let msgArr = []
 
