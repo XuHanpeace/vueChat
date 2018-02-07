@@ -45,7 +45,7 @@ export default {
 		
 	},
 	created() {
-		const socket = io.connect('http://39.106.213.209/#/chats/dialogue')
+		const socket = io()
 
 		//建立socket连接，接收msgList信息
 		this.socket = socket

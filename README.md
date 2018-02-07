@@ -31,7 +31,6 @@ npm run build --report
 ## 注意
 
 1. 使用chrome手机模拟器可获得最佳用户体验
-2. 如果想使用手机浏览器或其他设备访问，请将 **APP.vue** **chat.vue** 和 **dialogue.vue** 文件里 **http://localhost:8081** 中的 **localhost** 替换为你的本机IP地址
 
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
