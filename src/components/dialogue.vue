@@ -45,7 +45,7 @@ export default {
 		
 	},
 	created() {
-		const socket = io.()
+		const socket = io()
 
 		//建立socket连接，接收msgList信息
 		this.socket = socket
